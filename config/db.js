@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-main().catch(err => console.log(err));
 
 module.exports = {
     main: async () => {

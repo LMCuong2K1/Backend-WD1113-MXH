@@ -1,25 +1,24 @@
 const express = require("express");
-const app = express();
-const cors = require('cors');
+const app = require('./app');
 const dotenv = require('dotenv');
 const db = require('./config/db');
 const localErrorHandler = require("./utils/localErrorHandler");
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
-app.use(localErrorHandler);
+
 
 const connectDB = () => {
     return db.main();
 };
-
+const connectPort = process.env.PORT || 3000;
 const startServer = async () => {
     await connectDB();
-    app.listen(process.env.PORT || 3000, async () => {
-        console.log('Server Backend is bla bla bla...');
+    app.listen(connectPort, async () => {
+        console.log('Server Backend đã bla bla bla... ở cổng ' + connectPort);
     });
 };
+
 
 startServer().catch(err => {
     console.log(err);

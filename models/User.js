@@ -42,6 +42,11 @@ UserSchema.pre('save', async function () {
 UserSchema.methods.matchPassword = async function (enteredPass) {
     return bcrypt.compare(enteredPass, this.password);
 };
+UserSchema.method.toJSON = function(){
+    const user = this.toObject();
+    delete user.password;
+    return user;
+}
 
 UserSchema.plugin(mongooseDelete, { deletedAt: true, deletedBy: true, overrideMethods: true });
 const User = mongoose.model('User', UserSchema);

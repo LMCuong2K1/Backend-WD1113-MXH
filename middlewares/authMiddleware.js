@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const catchAsync = require('catch-async-wrapper-express');
+const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
 class AuthMiddleware {

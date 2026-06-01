@@ -1,12 +1,7 @@
-const express = require("express");
-const app = require('./app');
 const dotenv = require('dotenv');
 const db = require('./config/db');
-const localErrorHandler = require("./utils/localErrorHandler");
-
 dotenv.config();
-app.use(express.json());
-
+const app = require('./app');
 
 const connectDB = () => {
     return db.main();

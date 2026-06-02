@@ -11,10 +11,19 @@ class PostController {
     );
     sendResponse(res, 201, "Tạo bài viết thành công!", post);
   });
-  getById = catchAsync(async (req, res) => {});
-  getAll = catchAsync(async (req, res) => {});
-  update = catchAsync(async (req, res) => {});
-  delete = catchAsync(async (req, res) => {});
+  getById = catchAsync(async (req, res) => {
+    const postId = req.params;
+    const post = await postService.findbyId(postId);
+    sendResponse(res, 201, "Tìm kiếm bài viết thành công!", post);
+  });
+  getAll = catchAsync(async (req, res) => { });
+  update = catchAsync(async (req, res) => {
+    const postId = req.params;
+    const { title, content, category, image } = req.body;
+    const post = await postService.update(postId, { title, content, category, image });
+    sendResponse(res, 201, "Cập nhật bài viết thành công!", post);
+  });
+  delete = catchAsync(async (req, res) => { });
 }
 
 module.exports = new PostController();

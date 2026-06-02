@@ -42,7 +42,7 @@ UserSchema.pre('save', async function () {
 UserSchema.methods.matchPassword = async function (enteredPass) {
     return bcrypt.compare(enteredPass, this.password);
 };
-UserSchema.method.toJSON = function(){
+UserSchema.methods.toJSON = function () {
     const user = this.toObject();
     delete user.password;
     return user;

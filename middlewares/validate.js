@@ -2,7 +2,7 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync")
 
 const validate = (schema) => {
-    return catchAsync((req, res, next) => {
+    return catchAsync(async (req, res, next) => {
         const { error, value } = schema.validate(req.body, {
             abortEarly: false, stripUnknown: true
         });

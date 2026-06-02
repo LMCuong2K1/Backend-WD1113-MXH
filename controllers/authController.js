@@ -17,6 +17,9 @@ class AuthController {
             }
         )
     });
+    myInfo = catchAsync(async (req, res) => {
+        sendResponse(res, 200, "Thông tin người dùng: ", req.user);
+    })
 
 }
 

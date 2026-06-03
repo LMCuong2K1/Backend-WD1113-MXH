@@ -42,7 +42,7 @@ class PostService {
   like = async (postId, userId) => {
     let like = true;
     const post = await this.getById(postId);
-    const user = post.likes.includes(userId.toString());
+    const user = post.likes.includes(userId);
     if (!user) {
       post.likes.push(userId);
     }

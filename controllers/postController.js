@@ -17,8 +17,14 @@ class PostController {
     sendResponse(res, 200, "Tìm kiếm bài viết thành công!", post);
   });
   getAll = catchAsync(async (req, res) => {
-    const post = await postService.getAll({});
-    sendResponse(res, 200, "Tìm bài viết thành công", post);
+    const { page, limit, search, category } = req.query;
+    const { posts, currentPage, totalPages, total } = await postService.getAll({ page, limit, search, category });
+    sendResponse(res, 200, "Tìm bài viết thành công", {
+      posts,
+      currentPage: currentPage,
+      totalPages: totalPages,
+      total: total
+    });
   });
   update = catchAsync(async (req, res) => {
     const postId = req.params.id;

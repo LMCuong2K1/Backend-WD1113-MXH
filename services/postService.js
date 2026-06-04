@@ -12,9 +12,20 @@ class PostService {
     });
     return post;
   };
-  getAll = async () => {
-    const post = await Post.find({});
-    return post;
+  getAll = async (query) => {
+    const { page = 1, limit = 10, search, category } = query;
+    const filter = {};
+    if (search) {
+      filter.title = { $regex: search, $options: "i" }
+    };
+    if (category) {
+      filter.category = category;
+    }
+    const skip = (Number(page) - 1) * Number(limit)
+    const [posts, total] = await Promise.all([Post.find(filter).populate('author', 'name avatar').sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Post.countDocuments(filter)]);
+    const totalPages = Math.ceil(total / limit);
+    return { posts, currentPage: page, totalPages, total };
   };
   getById = async (postId) => {
     const post = await Post.findById(postId);

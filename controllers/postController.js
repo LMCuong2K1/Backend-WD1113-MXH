@@ -13,7 +13,7 @@ class PostController {
   });
   getById = catchAsync(async (req, res) => {
     const postId = req.params.id;
-    const post = await postService.findbyId(postId);
+    const post = await postService.getById(postId);
     sendResponse(res, 200, "Tìm kiếm bài viết thành công!", post);
   });
   getAll = catchAsync(async (req, res) => {

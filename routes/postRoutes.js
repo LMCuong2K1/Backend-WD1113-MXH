@@ -8,10 +8,9 @@ const router = express.Router();
 
 router.post('/', protect, PostController.create);
 router.get('/:id', PostController.getById);
-router.use(':/postId/comments', commentRoutes);
+router.use('/:postId/comments', commentRoutes);
 router.get('/', PostController.getAll);
 router.put('/:id', protect, authorize(Post, ["Admin"], true), PostController.update);
 router.delete('/:id', protect, authorize(Post, ["Admin"], true), PostController.delete);
-
 router.post('/:id/like', protect, PostController.like);
 module.exports = router;

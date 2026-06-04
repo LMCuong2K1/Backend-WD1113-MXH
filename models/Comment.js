@@ -10,6 +10,10 @@ const CommentSchema = new mongoose.Schema({
     likes: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }],
+    content: {
+        type: String,
+        require: true
+    },
     parentComment: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Comment',
         default: null
